@@ -1,0 +1,189 @@
+<meta charset="utf-8" />
+<body style="background:#F5F5F5">
+	<script
+  src="https://code.jquery.com/jquery-3.4.0.min.js"
+  integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg="
+  crossorigin="anonymous"></script>
+<center><canvas id="canvas" width="900" height="900" style="background:#FFF"></canvas></center>
+<div style="position:absolute;z-index:3;top:200;right:20;height:550px;width:300px;border:1px solid silver;background:white;padding:10px;border-radius:6px">
+	<center><button onclick="demo()" id="demo">Démo</button></center>
+	<hr />
+	<b>Nouvel élément</b><br /><br />
+		<select id="type">
+			<option value="square">Rectangle</option>
+			<option value="3square">3 rectangles</option>
+			<option value="slrounded">Rectangle arrondi</option>
+			<option value="rounded">Arrondi</option>
+		</select><br /><br />
+		<label for="text">Contenu</label>
+		<input type="text" id="text" /><br /><br />
+		<label for="segment">Segment</label>
+		<select id="segment">
+			<option value=0>0</option>
+			<option value=1>1</option>
+			<option value=2>2</option>
+			<option value=3>3</option>
+			<option value=4>4</option>
+			<option value=5>5</option>
+			<option value=6>6</option>
+			<option value=7>7</option>
+			<option value=8>8</option>
+			<option value=9>9</option>
+		</select><br /><br />
+		<label for="style">Style</label>
+		<select id="style">
+			<option value="default">Default</option>
+			<option value="blue">blue</option>
+			<option value="darkblue">darkblue</option>
+			<option value="purple">purple</option>
+			<option value="red">red</option>
+			<option value="orange">orange</option>
+			<option value="green">green</option>
+			<option value="grey">grey</option>
+			<option value="black">black</option>
+		</select><br /><br />
+		<button onclick="addEl()">Ajouter</button>
+	<hr />
+	<b>Nouveau connecteur</b><br /><br />
+	<select id="typeConnector">
+			<option value="default">Default</option>
+			<option value="verticalCurve">Vertical curve</option>
+		</select><br /><br />
+	<label for="style">Style</label>
+	<select id="styleConnector">
+		<option value="default">Default</option>
+		<option value="blue">blue</option>
+		<option value="darkblue">darkblue</option>
+		<option value="purple">purple</option>
+		<option value="red">red</option>
+		<option value="orange">orange</option>
+		<option value="green">green</option>
+		<option value="grey">grey</option>
+		<option value="black">black</option>
+	</select><br /><br />
+	<label for="from">De</label><span id="fromSelect">{insérer des éléments}</span><br /><br />
+	<label for="to">A</label><span id="toSelect"></span><br /><br />
+	<label for="fromPoint">Point de départ</label>
+	<select id="fromPoint">
+		<option value="default">Automatic</option>
+		<option value="top">top (3)</option>
+		<option value="top-1">top 1</option>
+		<option value="top-2">top 2</option>
+		<option value="top-4">top 4</option>
+		<option value="top-5">top 5</option>
+		<option value="bottom">bottom (3)</option>
+		<option value="bottom-1">bottom 1</option>
+		<option value="bottom-2">bottom 2</option>
+		<option value="bottom-4">bottom 4</option>
+		<option value="bottom-5">bottom 5</option>
+		<option value="left">left (3)</option>
+		<option value="left-1">left 1</option>
+		<option value="left-2">left 2</option>
+		<option value="left-4">left 4</option>
+		<option value="left-5">left 5</option>
+		<option value="right">right (3)</option>
+		<option value="right-1">right 1</option>
+		<option value="right-2">right 2</option>
+		<option value="right-4">right 4</option>
+		<option value="right-5">right 5</option>
+	</select><br /><br />
+	<label for="toPoint">Point d'arrivée</label>
+	<select id="toPoint">
+		<option value="default">Automatic</option>
+		<option value="top">top (3)</option>
+		<option value="top-1">top 1</option>
+		<option value="top-2">top 2</option>
+		<option value="top-4">top 4</option>
+		<option value="top-5">top 5</option>
+		<option value="bottom">bottom (3)</option>
+		<option value="bottom-1">bottom 1</option>
+		<option value="bottom-2">bottom 2</option>
+		<option value="bottom-4">bottom 4</option>
+		<option value="bottom-5">bottom 5</option>
+		<option value="left">left (3)</option>
+		<option value="left-1">left 1</option>
+		<option value="left-2">left 2</option>
+		<option value="left-4">left 4</option>
+		<option value="left-5">left 5</option>
+		<option value="right">right (3)</option>
+		<option value="right-1">right 1</option>
+		<option value="right-2">right 2</option>
+		<option value="right-4">right 4</option>
+		<option value="right-5">right 5</option>
+	</select><br /><br />
+	<button onclick="addCn()">Connecter</button>
+</div>
+<script type="text/javascript" src="Glorygram.js"></script>
+<script type="text/javascript">
+
+	var g = new Glorygram(document.getElementById('canvas'));
+function demo() {	
+	$('#demo').hide();
+	g.createSlightlyRoundedElement("A", 0, "Shareholder 1", {style:"darkblue"});
+	g.createSlightlyRoundedElement("B", 0, "Shareholder 2", {style:"darkblue"});
+	g.createSquareElement("H", 1, "Holding 1");
+	g.createSquareElement("C", 2, "Holding 2");
+	g.createSquareElement("D", 3,'test', {style:'purple'});
+	g.createSquareElement("E", 3,'test', {style:'orange'});
+	g.createSquareElement("F", 3,'test', {style:'green'});
+	g.createRoundedElement("G", 3, "Bank", {style:"red"});
+
+	g.createSquareElement("J", 4);
+	g.createElement("3square","K", 4);
+	//g.createSquareElement("x", 4);
+	g.createSquareElement("L", 4);
+	//g.createConnector("A", "B");
+	g.createConnector("A", "H");
+	g.createConnector("B", "H");
+	g.createConnector("H", "C", {text:"test"});
+	g.createConnector("C", "D", {text:"test"});
+	g.createConnector("C", "E", {text:"test"});
+	g.createConnector("C", "F", {text:"test"});
+	//g.createConnector("H", "F", {toPoint:"top-4"});
+	g.createConnector('G', 'F', {style:"debt", text:"x%"});
+	g.createConnector('G', 'H', {text:"y%", type:"verticalCurve", style:"debt",fromPoint:"top-2", toPoint:"right"});
+	g.createConnector("E", "J", {text:"test"});
+	g.createConnector("E", "K", {text:"test"});
+	g.createConnector("F", "L", {text:"test"});
+	g.createGroup("Test", ["C", "D", "E", "F"]);
+	g.createStyle("debt", {lineWidth:3, arrowheadSize:9, textColor:g.getStyleProperty('red', 'fillColor')}, "red");
+	generateElList('from');
+	generateElList('to');
+	g.render();
+}
+
+function generateElList(id) {
+	let rt = "<select id='"+id+"'>";
+	for(uid in g.elms) {
+		rt+="<option value='"+uid+"'>"+(g.elms[uid].text||'Element sans texte')+"</option>";
+	}
+	rt+="</select>";
+	$('#'+id+'Select').html(rt);
+}
+
+function addEl(){
+	g.createElement($('#type').val(), Math.random(), parseInt($('#segment').val()), $('#text').val(), {style:$('#style').val()});
+	$('#text').val('');
+	generateElList('from');
+	generateElList('to');
+	g.render();
+}
+
+function addCn(){
+	let options = {};
+	options.style = $('#styleConnector').val();
+	options.type = $('#typeConnector').val();
+	if($('#fromPoint').val()!="default")options.fromPoint=$('#fromPoint').val();
+	if($('#toPoint').val()!="default")options.toPoint=$('#toPoint').val();
+	g.createConnector($('#from').val(), $('#to').val(), options);
+	g.render();
+}
+	/*
+	TO CHECK SEGMENT GENERATION:
+		g.ctx.fillStyle='red';
+		for(segment of g.segments){
+			g.ctx.fillRect(0, segment.minY, g.canvas.width, (segment.maxY-segment.minY));
+		}
+	*/
+</script>
+</body>
